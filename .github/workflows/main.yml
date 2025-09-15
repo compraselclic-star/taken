@@ -1,0 +1,24 @@
+name: Hashcat Brute Force
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hashcat_bruteforce:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Hashcat
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hashcat
+
+      - name: Run Hashcat brute force
+        run: |
+          hashcat -m 22000 -a 3 manidehs.hc22000 ?d?d?d?d?d?d?d?d --force --status
+
+      - name: Show Hashcat results
+        run: |
+          hashcat -m 22000 -a 3 manidehs.hc22000 ?d?d?d?d?d?d?d?d --show
